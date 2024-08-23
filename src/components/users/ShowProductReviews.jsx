@@ -28,11 +28,6 @@ export default function ShowProductReviews() {
         fetchReviews()
     }, [])
 
-    //Loading state
-    // if (!reviews) {
-    //     return <div className='text-center py-8'>Loading...</div>
-    // }
-
 
     return (
         <div className="mt-8">
@@ -44,7 +39,7 @@ export default function ShowProductReviews() {
                     {reviews.map((review) => (
                         <div key={review._id} className="border p-4 rounded-lg shadow-sm">
                             <div className="flex items-center justify-between mb-2">
-                                <h3 className="text-lg font-semibold">{review.user.firstName}</h3>
+                                <h3 className="text-lg font-semibold">{`${review.user.firstName} ${review.user.lastName}`}</h3>
                                 <div className="flex items-center">
 
                                     {Array(review.rating).fill(0).map((_, index) => (
@@ -55,7 +50,7 @@ export default function ShowProductReviews() {
 
                                 </div>
                             </div>
-                            <p className="text-gray-700">{review.review}</p>
+                            <p className="font-light">{review.review}</p>
                         </div>
                     ))}
                 </div>
