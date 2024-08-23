@@ -15,6 +15,7 @@ export default function AdminRoute({ children }) {
                         withCredentials: true,
                     },
                 );
+                
 
                 const data = res.data;
                 console.log(data);
