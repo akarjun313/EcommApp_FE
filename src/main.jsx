@@ -30,6 +30,7 @@ import AdminRoute from './protected routes/AdminRoute';
 import GettingOrdersPage from './pages/seller/GettingOrdersPage';
 import SellerRoute from './protected routes/SellerRoute';
 import UserRoute from './protected routes/UserRoute';
+import ErrorPage from './pages/ErrorPage';
 
 
 const router = createBrowserRouter([
@@ -115,6 +116,10 @@ const router = createBrowserRouter([
         element: <AdminRoute> <ShowSellerList /> </AdminRoute>
       }
     ]
+  },
+  {
+    path: '*',
+    element: <ErrorPage />
   }
   
 ]);
