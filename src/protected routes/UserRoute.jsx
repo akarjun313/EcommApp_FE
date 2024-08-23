@@ -9,7 +9,7 @@ export default function UserRoute({ children }) {
         const checkUser = async () => {
             try {
                 const res = await axios.get(
-                    `${baseUrl}/api/v1/user//authenticate-user`,
+                    `${baseUrl}/api/v1/user/authenticate-user`,
                     {
                         withCredentials: true,
                     },
