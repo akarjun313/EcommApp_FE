@@ -3,4 +3,4 @@
 
 
 
-export const baseUrl = 'ecommappbe-production.up.railway.app'
+export const baseUrl = 'https://ecommappbe-production.up.railway.app'
