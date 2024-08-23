@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function CustomerServicePage() {
     return (
@@ -31,6 +32,9 @@ export default function CustomerServicePage() {
                         LinkedIn
                     </a>
                 </div>
+            </div>
+            <div>
+                <Link to={'/admin/login'} className="text-blue-500 hover:underline">Admin &gt;&gt;&gt;</Link>
             </div>
         </div>
     )
