@@ -87,7 +87,7 @@ export default function LoginPage() {
 
                     <button type='submit' className="btn btn-primary">Login</button>
                 </form>
-                <p className='text-sm mt-10 text-base-content'>I don't have an account. <Link className='link underline-offset-2' to="/signup">Sign-up</Link></p>
+                <p className='text-sm mt-10 text-base-content'>I don't have an account. <Link className='link underline-offset-2' to="/sign-up">Sign-up</Link></p>
             </div>
         </div>
     )
