@@ -1,8 +1,34 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ThemeToggler from '../../ui/ThemeToggler'
+import { toast } from 'react-toastify'
+import { useResetRecoilState } from 'recoil'
+import { userAtom } from '../../logic/atoms'
+import axios from 'axios'
+import { baseUrl } from '../../baseURL/baseURL'
+import Cookies from 'js-cookie'
 
 export default function SellerNavbar() {
+
+    const resetUser = useResetRecoilState(userAtom)
+
+    const handleLogout = async () => {
+        try {
+            const res = await axios.post(`${baseUrl}/api/v1/user/logout`, {}, { withCredentials: true })
+            if (res.data.success) {
+                Cookies.remove('token')
+                resetUser()
+                localStorage.removeItem('userEmail')
+                toast.success(res.data.message)
+            } else {
+                toast.error('Error in Logging-out')
+            }
+        } catch (error) {
+            console.log("error in user logout", error)
+            toast.error('Error in Logging-out')
+        }
+    }
+
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -39,7 +65,7 @@ export default function SellerNavbar() {
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                         <li><Link to={'/seller/profile'}>Profile</Link></li>
                         <li><Link to={'/seller/orders'}>Orders</Link></li>
-                        <li><Link to='/login'>Login</Link></li>
+                        <li><Link to='/login' onClick={handleLogout}>Logout</Link></li>
                     </ul>
                 </div>
             </div>

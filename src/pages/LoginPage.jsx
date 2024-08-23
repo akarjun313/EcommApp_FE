@@ -34,6 +34,7 @@ export default function LoginPage() {
             if(res.data.success === true){
                 toast.success(res.data.message[0])
                 setUser(res.data.message[1])
+                localStorage.setItem('userEmail', res.data.message[1].email)
                 if(res.data.message[1].role === 'seller'){
                     navigate('/seller/home')
                 }else{

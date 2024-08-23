@@ -5,18 +5,17 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { baseUrl } from '../baseURL/baseURL'
 import { toast } from 'react-toastify'
-import Cookies from 'js-cookie'
 
 export default function ProductDetailsPage() {
 
-    const token = Cookies.get('token')
+    const userEmail = localStorage.getItem('userEmail')
 
     const { id } = useParams()
     const [loading, setLoading] = useState(false)
 
     const addToCart = async () => {
         try {
-            if (token) {
+            if (userEmail) {
                 const res = await axios.post(`${baseUrl}/api/v1/user/add-to-cart/${id}`, {}, { withCredentials: true })
                 if (res.data.success === true) {
                     toast.success(res.data.message)

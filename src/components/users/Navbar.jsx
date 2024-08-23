@@ -15,8 +15,9 @@ export default function Navbar() {
     const resetUser = useResetRecoilState(userAtom)
 
     useEffect(() => {
-        const token = Cookies.get('token')
-        if (token && !user) {
+        
+        const userEmail = localStorage.getItem('userEmail')
+        if (userEmail && !user) {
 
             axios.get(`${baseUrl}/api/v1/user/user-check`, { withCredentials: true })
                 .then((res) => {
@@ -46,6 +47,7 @@ export default function Navbar() {
                 if (res.data.success) {
                     Cookies.remove('token')
                     resetUser()
+                    localStorage.removeItem('userEmail')
                     setIsLoggedIn(false)
                 }
             } catch (error) {

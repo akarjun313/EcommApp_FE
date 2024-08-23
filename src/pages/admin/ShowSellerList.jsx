@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { baseUrl } from '../../baseURL/baseURL'
 import { toast } from 'react-toastify'
-import { PiDatabase } from 'react-icons/pi'
 
 export default function ShowSellerList() {
 
