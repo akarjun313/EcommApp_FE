@@ -41,7 +41,7 @@ export default function ProductListingPage() {
         <div className="container mx-auto px-4 py-8">
             <SearchBar products={products} setFilteredProducts={setFilteredProducts} />
             <h1 className="text-2xl font-semibold mb-8 mt-8">Product Listing</h1>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {filteredProducts.length === 0 ? (
                     <h2 className="col-span-full text-center text-lg">No items to list</h2>
                 ) : (
