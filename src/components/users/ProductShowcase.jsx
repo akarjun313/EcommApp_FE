@@ -69,22 +69,24 @@ export default function ProductShowcase() {
                     </h6>
                 </Link>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {products.length > 0 ? (
-                products.map(product => (
-                    <WatchCard 
-                        key={product._id}
-                        imgSrc={product.image[0]}
-                        title={product.model}
-                        description={product.description}
-                        productId={product._id}
-                    />
-                ))
-            ) : (
-                <h2 className="text-center text-2xl font-semibold col-span-full">
-                    No items to list
-                </h2>
-            )}
+            <div className='flex justify-center px-3'>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20">
+                    {products.length > 0 ? (
+                        products.map(product => (
+                            <WatchCard
+                                key={product._id}
+                                imgSrc={product.image[0]}
+                                title={product.model}
+                                description={product.description}
+                                productId={product._id}
+                            />
+                        ))
+                    ) : (
+                        <h2 className="text-center text-2xl font-semibold col-span-full">
+                            No items to list
+                        </h2>
+                    )}
+                </div>
             </div>
         </div>
     )

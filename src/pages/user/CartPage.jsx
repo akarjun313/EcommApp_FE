@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import BookingButton from '../../components/users/BookingButton'
 import { useRecoilState } from 'recoil'
 import { cartReloadAfterBooking } from '../../logic/atoms'
+import CartTotal from '../../components/users/CartTotal'
 
 export default function CartPage() {
 
@@ -73,7 +74,7 @@ export default function CartPage() {
     }
 
 
-    
+    const totalPrice = cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0)
 
     if (loading) {
         return <div className="text-center py-8">Loading...</div>
@@ -132,9 +133,6 @@ export default function CartPage() {
                                         <td>{item.product.price * item.quantity}</td>
                                         <th>
                                             <BookingButton amount={item.product.price*item.quantity} cId={item._id}/>
-                                            {
-
-                                            }
                                         </th>
                                         <th>
                                             <button
@@ -161,6 +159,9 @@ export default function CartPage() {
                         </table>
                     </div>
                 )}
+                { cartItems.length > 0 && 
+                    <CartTotal qty={cartItems.length} price={totalPrice}/>
+                }
         </div>
     )
 }

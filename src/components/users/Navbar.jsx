@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import ThemeToggler from '../../ui/ThemeToggler'
 import { useResetRecoilState, useRecoilState } from 'recoil'
 import { userAtom } from '../../logic/atoms'
@@ -13,9 +13,12 @@ export default function Navbar() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [user, setUser] = useRecoilState(userAtom)
     const resetUser = useResetRecoilState(userAtom)
+    const [cartCount, setCartCount] = useState(0)
+
+    const navigate = useNavigate()
 
     useEffect(() => {
-        
+
         const userEmail = localStorage.getItem('userEmail')
         if (userEmail && !user) {
 
@@ -57,6 +60,24 @@ export default function Navbar() {
         }
     }
 
+
+    const countCart = async () => {
+        if (isLoggedIn) {
+            try {
+                const res = await axios.get(`${baseUrl}/api/v1/user/count-cart`, { withCredentials: true })
+                if (res.data.success) {
+                    setCartCount(res.data.message)
+                }
+            } catch (error) {
+                console.log("error in countcart", error)
+            }
+        }
+    }
+    useEffect(()=>{
+        countCart()
+    }, [isLoggedIn])
+
+
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -82,6 +103,28 @@ export default function Navbar() {
                 {/* add something for theme */}
                 <ThemeToggler />
 
+                {/* cart button  */}
+                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle" disabled={!isLoggedIn} onClick={() => navigate('/cart')}>
+                    <div className="indicator">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+
+                        {isLoggedIn &&
+                            <span className="badge badge-sm indicator-item">{cartCount}</span>
+                        }
+                    </div>
+                </div>
+
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
@@ -94,13 +137,6 @@ export default function Navbar() {
                                 <Link to='/profile'>Profile</Link>
                             ) : (
                                 <span className="cursor-not-allowed text-gray-500">Profile</span>
-                            )}
-                        </li>
-                        <li>
-                            {isLoggedIn ? (
-                                <Link to='/cart'>Cart</Link>
-                            ) : (
-                                <span className="cursor-not-allowed text-gray-500">Cart</span>
                             )}
                         </li>
                         <li>

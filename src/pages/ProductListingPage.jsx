@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { baseUrl } from '../baseURL/baseURL'
 import { toast } from 'react-toastify'
 import WatchCard from '../ui/WatchCard'
+import SearchBar from '../components/users/SearchBar'
 
 export default function ProductListingPage() {
 
 
     const [products, setProducts] = useState([])
+    const [filteredProducts, setFilteredProducts] = useState([])
     const [loading, setLoading] = useState(true)
 
     const fetchProducts = async () => {
@@ -15,6 +17,7 @@ export default function ProductListingPage() {
             const res = await axios.get(`${baseUrl}/api/v1/user/listing`, { withCredentials: true })
             if (res.data.success === true) {
                 setProducts(res.data.message)
+                setFilteredProducts(res.data.message)
             } else {
                 toast.error(res.data.message)
             }
@@ -36,12 +39,13 @@ export default function ProductListingPage() {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-2xl font-semibold mb-8">Product Listing</h1>
+            <SearchBar products={products} setFilteredProducts={setFilteredProducts} />
+            <h1 className="text-2xl font-semibold mb-8 mt-8">Product Listing</h1>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                {products.length === 0 ? (
+                {filteredProducts.length === 0 ? (
                     <h2 className="col-span-full text-center text-lg">No items to list</h2>
                 ) : (
-                    products.map(product => (
+                    filteredProducts.map(product => (
                         <WatchCard
                             key={product._id}
                             imgSrc={product.image[0]}

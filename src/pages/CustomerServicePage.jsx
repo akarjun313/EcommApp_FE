@@ -33,9 +33,6 @@ export default function CustomerServicePage() {
                     </a>
                 </div>
             </div>
-            <div>
-                <Link to={'/admin/login'} className="text-blue-500 hover:underline">Admin &gt;&gt;&gt;</Link>
-            </div>
         </div>
     )
 }

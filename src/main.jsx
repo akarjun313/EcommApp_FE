@@ -31,6 +31,7 @@ import GettingOrdersPage from './pages/seller/GettingOrdersPage';
 import SellerRoute from './protected routes/SellerRoute';
 import UserRoute from './protected routes/UserRoute';
 import ErrorPage from './pages/ErrorPage';
+import ProductInDetail from './components/users/ProductInDetail';
 
 
 const router = createBrowserRouter([
@@ -114,6 +115,10 @@ const router = createBrowserRouter([
       {
         path: '/admin/product-list',
         element: <AdminRoute> <ShowSellerList /> </AdminRoute>
+      },
+      {
+        path:'/admin/product-detail/:id',
+        element: <AdminRoute> <ProductInDetail /> </AdminRoute>
       }
     ]
   },

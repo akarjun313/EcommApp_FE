@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { baseUrl } from '../../baseURL/baseURL'
 import { toast } from 'react-toastify'
+import { Link } from 'react-router-dom'
 
 export default function ShowSellerList() {
 
@@ -85,10 +86,10 @@ export default function ShowSellerList() {
                                                     />
                                                 </div>
                                             </div>
-                                            <div>
+                                            <Link to={`/admin/product-detail/${product._id}`}>
                                                 <div className="font-bold">{product.model}</div>
                                                 <div className="text-sm opacity-50">{product.brand}</div>
-                                            </div>
+                                            </Link>
                                         </div>
                                     </td>
                                     <td>
