@@ -3,4 +3,6 @@
 
 
 
-export const baseUrl = 'https://ecommappbe-production.up.railway.app'
+// export const baseUrl = 'https://ecommappbe-production.up.railway.app'
+
+export const baseUrl = 'https://ecommapp-be.onrender.com'
